@@ -27,10 +27,7 @@ letters_morse = {
     'W': '.--',
     'X': '-..-',
     'Y': '-.--',
-    'Z': '--..'
-}
-
-digit_morse = {
+    'Z': '--..',
     '0': '-----',
     '1': '.----',
     '2': '..---',
@@ -40,31 +37,43 @@ digit_morse = {
     '6': '-....',
     '7': '--...',
     '8': '---..',
-    '9': '----.'
-}
-
-space_morse = {
+    '9': '----.',
     ' ': '/'
 }
+decode_morse_dic = {value: key for (key, value) in letters_morse.items()}
+
 
 text_to_morse = input("Text to change into morse code:\n")
 
 list_from_text = [letter for letter in text_to_morse]
 
 text_in_morse = []
-for item in list_from_text:
-    upper_letter = item.upper()
-    if letters_morse.get(upper_letter) is not None:
-        morse_code = letters_morse.get(upper_letter)
-    elif digit_morse.get(upper_letter) is not None:
-        morse_code = digit_morse.get(upper_letter)
-    elif space_morse.get(upper_letter) is not None:
-        morse_code = space_morse.get(upper_letter)
-    else:
-        print(f"Error in text: {item} not used symbol."
-              f"Yours morse code will not have this symbol")
-    text_in_morse.append(morse_code)
 
 
-morse_text = ' '.join(text_in_morse)
-print(morse_text)
+def morse_code_create():
+    """Create a morse code from text"""
+    for item in list_from_text:
+        upper_letter = item.upper()
+        if letters_morse.get(upper_letter) is not None:
+            morse_code = letters_morse.get(upper_letter)
+        else:
+            print(f"Error in text: {item} not used symbol."
+                  f"Yours morse code will not have this symbol")
+        text_in_morse.append(morse_code)
+    morse_text = ' '.join(text_in_morse)
+    print(morse_text)
+
+
+list_of_word = []
+
+
+def morse_code_decode():
+    """Decode a morse code into text"""
+    for item in text_in_morse:
+        if decode_morse_dic.get(item) is not None:
+            list_of_word.append(decode_morse_dic.get(item))
+    print(' '.join(list_of_word))
+
+
+morse_code_create()
+morse_code_decode()
